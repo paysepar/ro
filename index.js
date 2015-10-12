@@ -1,7 +1,7 @@
 var express = require('express')
 var app = express();
 var http = require('http').Server(app);
-var portNumber = process.env.OPENSHIFT_NODEJS_PORT || process.env.PORT || 3002
+var portNumber = process.env.OPENSHIFT_NODEJS_PORT || process.env.PORT || 3000
 var ip = process.env.OPENSHIFT_NODEJS_IP || "127.0.0.1"
 
 app.get('/', function(req, res){

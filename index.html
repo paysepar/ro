@@ -1,3 +1,11 @@
+<!--
+
+To do:
+Create promotion page, give users a promo code to give to their friends. When their friends use the promo code at checkout, they both get $5.
+
+
+-->
+
 <!DOCTYPE HTML>
 <head>
 <style>
@@ -157,10 +165,10 @@
     <a href="https://plus.google.com/115049170485715300821/about" target="_blank"><img class="social-icon" src="/googlep.png"></a>
 </span>
 <div>
-    <p id="infoButton" class="button">Learn more</p>
+    <a href="#scooterbagcharger"><p id="infoButton" class="button">Learn more</p></a>
     <a href="http://www.ebay.com/itm/221911838032?ssPageName=STRK:MESELX:IT&_trksid=p3984.m1555.l2649" target="_blank"><p id="buyButton" class="button">Buy it now</p></a>
 </div>
-    <div id = "info">
+    <div id = "info" name="info">
     <h2>What's included in your purchase?</h2>
 <img src="scooterbagcharger.png" id="scooterbagcharger">
     <h2>Specifications:</h2>
@@ -181,9 +189,6 @@
 <!-- Scripts -->
 <script>
 // DOM objects
-var infoButton = document.getElementById('infoButton')
-infoButton.addEventListener('click', function() {
-    info.style.display = "block"
-}, false)
+
 </script>
 </body>
