@@ -1,0 +1,302 @@
+<!--
+
+To do:
+
+    - Create promotion page, give users a promo code to give to their friends. When their friends use the promo code at checkout, they both get $5.
+
+    - Center the scooterbagcharger.png picture
+
+
+-->
+
+<!DOCTYPE HTML>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<style>
+    body {
+        margin: 0px 0px 60px 0px;
+        font-family: 'source-sans-pro','Helvetica Neue',Helvetica,Arial,sans-serif;
+        font-weight:bold;
+    }
+    
+    /* Promotion bar at the top of the page */
+     #promotion-bar {
+         text-align: center;
+         margin: 0px;
+         padding: 15px;
+         color: #fff;
+         background-color: #059
+     }
+    #promotion-link {
+        padding: 10px 30px;
+        background-color: #059;
+        color: #fff;
+        border-radius: 20px;
+        transition: 200ms;
+        text-decoration: none;
+    }
+    #promotion-link:hover {
+        background-color: #059;
+        color: #fff;  
+        background-color:#fff;
+        color:#059;
+    }
+    #promotion-link:active {
+        background-color:#fff;
+        color:#059;
+    }
+    
+    /* Rollnado logo */
+    #logo {
+        width: 150px;
+        padding-left: 30px;
+        padding-top: 10px;
+        animation-name: fadeInLogo;
+        animation-duration: 0.6s;
+        animation-iteration-count: 1;
+        animation-fill-mode:forwards;
+    }
+    @-webkit-keyframes fadeInLogo {
+        0% {opacity: 0;}
+        50% {opacity: 0;}
+        100% {opacity: 1;}
+    }
+    @keyframes fadeInLogo {
+        0% {opacity: 0;}
+        50% {opacity: 0;}
+        100% {opacity: 1;}
+    }
+    @-webkit-keyframes rollTornado {
+        from { -webkit-transform: rotate(0deg) scale(0.01);}
+        to { -webkit-transform: rotate(-2520deg) scale(1); }
+    }
+    @keyframes rollTornado {
+        from {transform:rotate(0deg) scale(0.01); }
+        to {transform:rotate(-2520deg) scale(1); }
+    }
+    
+    /* Social icons */
+    .social-icon {
+        width: 30px;
+        opacity: .7;
+        transition: 200ms;
+    }
+    .social-icon:hover {
+        opacity: 1;
+        cursor: pointer; cursor: hand;
+    }
+    #social-bar {
+        display: inline-block;
+        position: absolute;
+        right: 20px;
+        top: 57px;
+    }
+    
+    /* Buttons */
+    .button {
+        width: 50%;
+        display: inline-block;
+        float: left;
+        text-align: center;
+        padding-top: 30px;
+        padding-bottom: 30px;
+        font-size: 20pt;
+        transition: 200ms;
+    }
+    #infoButton {
+        color: white;
+        background-color: red;
+    }
+    #buyButton {
+        color: white;
+        background-color: green;
+    }
+    #infoButton:hover {
+        background-color: darkred;
+        cursor: pointer; cursor: hand;
+    }
+    #buyButton:hover {
+        background-color: darkgreen;
+        cursor: pointer; cursor: hand;
+    }
+    #scooterbagcharger {
+        width: 100%;
+        max-width: 600px;
+        margin-left:auto;
+        margin-right: auto;
+    }
+    h2 {
+        margin: auto;
+        text-align: center;
+        padding-top: 50px;
+        padding-bottom: 25px;
+    }
+    ul {
+        margin-left: auto;
+        margin-right: auto;
+        width: 350px;
+        margin-top: 0px;
+    }
+    li {
+        font-weight: normal;
+    }
+    .scooterImage {
+        height: 100px;
+    }
+    .scooterPicker > * { /*all children of .scooterPicker class*/
+        display: inline;
+    }
+    .scooterPickerButton {
+        cursor: pointer;
+        background-color: white;
+        transition: 80ms;
+        font-size: 100px;
+        padding: 0px 50px;
+        /* disable text selection */
+        -webkit-touch-callout: none;
+        -webkit-user-select: none;
+        -khtml-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+        
+    }
+    .scooterPickerButton:hover {
+        background-color: gray;
+    }
+    input {
+        width: 80px;
+        height: 80px;
+        font-size: 40px;
+    }
+</style>
+</head>
+
+<body>
+<p id="promotion-bar">
+    <a id="promotion-link" href="http://www.rollnado.com">Refer a friend, and you both get $5 back.</a>
+</p>
+<div id="rollnadoLogo">
+<img id="logo" src="/rollnado-nodotcom.png">
+</div>
+<span id="social-bar">
+    <a href="https://www.facebook.com/rollnado" target="_blank"><img class="social-icon" src="/faceb.png"></a>
+    <a href="https://twitter.com/rollnado" target="_blank"><img class="social-icon" src="/twitter.png"></a>
+    <a href="https://www.youtube.com/channel/UCX14C0Qe9SJqLaYk35gWLYw" target="_blank"><img class="social-icon" src="/youtube.png"></a>
+    <a href="https://instagram.com/rollnado/" target="_blank"><img class="social-icon" src="/insta.png"></a>
+    <a href="https://plus.google.com/115049170485715300821/about" target="_blank"><img class="social-icon" src="/googlep.png"></a>
+</span>
+<div id="scooterSelection">
+    <div id="blackBluetooth" class = "scooterPicker"></div>
+    <div id="whiteBluetooth" class = "scooterPicker"></div>
+    <div id="goldBluetooth" class = "scooterPicker"></div>
+    <div id="redBluetooth" class = "scooterPicker"></div>
+    <div id="blueBluetooth" class = "scooterPicker"></div>
+    <div id="blackNo" class = "scooterPicker"><p class="scooterPickerButton" id="plusBlackNo">+</p><img class="scooterImage" src="/blackNo.png"><p class="scooterPickerButton" id="minusBlackNo">-</p><input type="text" id="blackNoQuant" value="0" maxlength="2"></div>
+    <div id="whiteNo" class = "scooterPicker"></div>
+    <div id="goldNo" class = "scooterPicker"></div>
+    <div id="redNo" class = "scooterPicker"><p class="scooterPickerButton" id="plusRedNo">+</p><img class="scooterImage" src="/redNo.png"><p class="scooterPickerButton" id="minusRedNo">-</p><input type="text" id="redNoQuant" value="0" maxlength="2"></div>
+    <div id="blueNo" class = "scooterPicker"><p class="scooterPickerButton" id="plusBlueNo">+</p><img class="scooterImage" src="/blueNo.png"><p class="scooterPickerButton" id="minusBlueNo">-</p><input type="text" id="blueNoQuant" value="0" maxlength="2"></div>
+</div>
+<a href="payment" id="checkoutIcon"><img src="/shoppingcart.jpg"></a>
+
+
+    
+    
+    
+<!-- Scripts -->
+<script>
+// DOM objects
+var plusBlackNoButton = document.getElementById('plusBlackNo')
+var minusBlackNoButton = document.getElementById('minusBlackNo')
+var blackNoQuantInput = document.getElementById('blackNoQuant')
+var plusRedNoButton = document.getElementById('plusRedNo')
+var minusRedNoButton = document.getElementById('minusRedNo')
+var redNoQuantInput = document.getElementById('redNoQuant')
+var plusBlueNoButton = document.getElementById('plusBlueNo')
+var minusBlueNoButton = document.getElementById('minusBlueNo')
+var blueNoQuantInput = document.getElementById('blueNoQuant')
+
+
+
+// Order object
+var order = {
+    blackNo: 0,
+    plusBlackNoToOrder: function(evt) {
+        evt.preventDefault()
+        var currentBlackNoQuant = parseInt(blackNoQuantInput.value) || 0
+        currentBlackNoQuant++
+        blackNoQuantInput.value = currentBlackNoQuant.toString()
+        order.blackNo = currentBlackNoQuant
+        console.log(currentBlackNoQuant)
+    },
+    minusBlackNoToOrder: function(evt) {
+        evt.preventDefault()
+        var currentBlackNoQuant = parseInt(blackNoQuantInput.value) || 0
+        if (currentBlackNoQuant > 0) {
+            currentBlackNoQuant--
+            blackNoQuantInput.value = currentBlackNoQuant.toString()
+            order.blackNo = currentBlackNoQuant
+            console.log(currentBlackNoQuant)
+        }
+    },
+    redNo: 0,
+    plusRedNoToOrder: function(evt) {
+        evt.preventDefault()
+        var currentRedNoQuant = parseInt(redNoQuantInput.value) || 0
+        currentRedNoQuant++
+        redNoQuantInput.value = currentRedNoQuant.toString()
+        order.redNo = currentRedNoQuant
+        console.log(currentRedNoQuant)
+    },
+    minusRedNoToOrder: function(evt) {
+        evt.preventDefault()
+        var currentRedNoQuant = parseInt(redNoQuantInput.value) || 0
+        if (currentRedNoQuant > 0) {
+            currentRedNoQuant--
+            redNoQuantInput.value = currentRedNoQuant.toString()
+            order.redNo = currentRedNoQuant
+            console.log(currentRedNoQuant)
+        }
+    },
+    blueNo: 0,
+    plusBlueNoToOrder: function(evt) {
+        evt.preventDefault()
+        var currentBlueNoQuant = parseInt(blueNoQuantInput.value) || 0
+        currentBlueNoQuant++
+        blueNoQuantInput.value = currentBlueNoQuant.toString()
+        order.blueNo = currentBlueNoQuant
+        console.log(currentBlueNoQuant)
+    },
+    minusBlueNoToOrder: function(evt) {
+        evt.preventDefault()
+        var currentBlueNoQuant = parseInt(blueNoQuantInput.value) || 0
+        if (currentBlueNoQuant > 0) {
+            currentBlueNoQuant--
+            blueNoQuantInput.value = currentBlueNoQuant.toString()
+            order.blueNo = currentBlueNoQuant
+            console.log(currentBlueNoQuant)
+        }
+    }
+}
+
+// Event Listeners
+    // click
+plusBlackNoButton.addEventListener('click', order.plusBlackNoToOrder)
+minusBlackNoButton.addEventListener('click', order.minusBlackNoToOrder)
+plusRedNoButton.addEventListener('click', order.plusRedNoToOrder)
+minusRedNoButton.addEventListener('click', order.minusRedNoToOrder)
+plusBlueNoButton.addEventListener('click', order.plusBlueNoToOrder)
+minusBlueNoButton.addEventListener('click', order.minusBlueNoToOrder)
+    // touch
+plusBlackNoButton.addEventListener('touchstart', order.plusBlackNoToOrder)
+minusBlackNoButton.addEventListener('touchstart', order.minusBlackNoToOrder)
+plusRedNoButton.addEventListener('touchstart', order.plusRedNoToOrder)
+minusRedNoButton.addEventListener('touchstart', order.minusRedNoToOrder)
+plusBlueNoButton.addEventListener('touchstart', order.plusBlueNoToOrder)
+minusBlueNoButton.addEventListener('touchstart', order.minusBlueNoToOrder)
+
+
+
+</script>
+</body>
