@@ -143,7 +143,7 @@ To do:
     .scooterImage {
         height: 100px;
     }
-    .scooterPicker > * { /*all children of .scooterPicker class*/
+    .scooterPicker > * { /*all children of .scooterPicker class */
         display: inline;
     }
     .scooterPickerButton {
@@ -156,10 +156,8 @@ To do:
     .scooterPickerButton:hover {
         background-color: gray;
     }
-    input {
-        width: 80px;
-        height: 80px;
-        font-size: 40px;
+    .hiddenInputField {
+        display: none;
     }
 </style>
 </head>
@@ -178,9 +176,33 @@ To do:
     <a href="https://instagram.com/rollnado/" target="_blank"><img class="social-icon" src="/insta.png"></a>
     <a href="https://plus.google.com/115049170485715300821/about" target="_blank"><img class="social-icon" src="/googlep.png"></a>
 </span>
-<form id="checkout" method="post" action="/checkout">
-  <div id="payment-form"></div>
-  <input type="submit" value="Pay">
+
+<!-- Braintree checkout form -->
+<form id="checkout" action="/checkout" method="post" autocomplete="off">
+    <div id="payment-form"></div>
+    <input name = "saleAmount" value="20.00" class="hiddenInputField">
+    <input name = "shippingAddress" value="123 Maple Way">
+    <input name = "items" value="1 blackNo" class="hiddenInputField">
+    <input name = "customerEmail" value="george@aol.com">
+    <input name = "customerFirstName" value="george">
+    <input name = "customerLastName" value = "may">
+    <input name = "customerPhone" value="5166920121">
+    <input name = "shippingStreetAddress" value="123 maple way">
+    <input name = "shippingExtendedAddress" value="">
+    <input name = "shippingCity" value="Woodgete">
+    <input name = "shippingState" value="NY">
+    <input name = "shippingPostalCode" value="12341">
+    <input name = "shippingFirstName" value="Begin">
+    <input name = "shippingLastName" value="Stein">
+    <input name = "billingFirstName" value="Begin">
+    <input name = "billingLastName" value="Stein">
+    <input name = "billingStreetAddress" value="123 Maple way">
+    <input name = "billingExtendedAddress" value="">
+    <input name = "billingCity" value="Yolanda">
+    <input name = "billingState" value="NY">
+    <input name = "billingPostalCode" value="12345">
+    <input name = "billingCountryCodeAlpha2" value="US">
+    <input type="submit" value="Pay">
 </form>
 
 <script src="https://js.braintreegateway.com/v2/braintree.js"></script>
@@ -200,7 +222,7 @@ xhttp.onreadystatechange = function() {
         })
     }
 }
-                                 
+
 
 </script>
 </body>

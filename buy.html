@@ -4,8 +4,31 @@ To do:
 
     - Create promotion page, give users a promo code to give to their friends. When their friends use the promo code at checkout, they both get $5.
 
-    - Center the scooterbagcharger.png picture
+    - Style:
+        Center the scooterbagcharger.png picture
+        Plus/minus buttons overlaid on scooter image
+        Plus/minus buttons given outline and hover qualities
+        Lots of other style things to make it sexy.
+        Format styles of payment form inputs to make it look like braintree dropin UI form
 
+    - Handle credit card processor error messages. What does the page do when different errors are encountered? I want a small message to pop up in response to all failed payments that prompt the user to retry payment.
+
+    - Order confirmation click button before order is processed
+
+    - (Editing/canceling orders... start by doing it through phone/email. Later on, could make it automatic.)Order edit page link sent to email, similar to Amazon. Allows users to change shipping address or payment method or cancel order if order isn't shipped yet.
+
+    - Promo code for friends to use sent to email.
+
+    - Give partial refunds of order when users get their friends to buy.
+
+    - After whole order is refunded, find out new way to compensate referrers. Maybe venmo. Or through gmail. Or facebook.
+
+    - Alt text for images for SEO and seeing impaired.
+
+    - Popup about the security things that the site is using (SSL, CPR, etc) near the checkout button
+
+
+    - Prompt users to fill out required fields of the form and do not allow submit button to work until required fields are filled out.
 
 -->
 
@@ -164,10 +187,13 @@ To do:
     .scooterPickerButton:hover {
         background-color: gray;
     }
-    input {
+    .scooterOrderQuant {
         width: 80px;
         height: 80px;
         font-size: 40px;
+    }
+    .hiddenInputField {
+        display: none;
     }
 </style>
 </head>
@@ -186,27 +212,75 @@ To do:
     <a href="https://instagram.com/rollnado/" target="_blank"><img class="social-icon" src="/insta.png"></a>
     <a href="https://plus.google.com/115049170485715300821/about" target="_blank"><img class="social-icon" src="/googlep.png"></a>
 </span>
-<div id="scooterSelection">
-    <div id="blackBluetooth" class = "scooterPicker"></div>
-    <div id="whiteBluetooth" class = "scooterPicker"></div>
-    <div id="goldBluetooth" class = "scooterPicker"></div>
-    <div id="redBluetooth" class = "scooterPicker"></div>
-    <div id="blueBluetooth" class = "scooterPicker"></div>
-    <div id="blackNo" class = "scooterPicker"><p class="scooterPickerButton" id="plusBlackNo">+</p><img class="scooterImage" src="/blackNo.png"><p class="scooterPickerButton" id="minusBlackNo">-</p><input type="text" id="blackNoQuant" value="0" maxlength="2"></div>
-    <div id="whiteNo" class = "scooterPicker"></div>
-    <div id="goldNo" class = "scooterPicker"></div>
-    <div id="redNo" class = "scooterPicker"><p class="scooterPickerButton" id="plusRedNo">+</p><img class="scooterImage" src="/redNo.png"><p class="scooterPickerButton" id="minusRedNo">-</p><input type="text" id="redNoQuant" value="0" maxlength="2"></div>
-    <div id="blueNo" class = "scooterPicker"><p class="scooterPickerButton" id="plusBlueNo">+</p><img class="scooterImage" src="/blueNo.png"><p class="scooterPickerButton" id="minusBlueNo">-</p><input type="text" id="blueNoQuant" value="0" maxlength="2"></div>
-</div>
-<a href="payment" id="checkoutIcon"><img src="/shoppingcart.jpg"></a>
+
+<div><span>Purchase amount: $</span><span id="totalOrderAmountDisplay">0</span></div>
+
+<!-- Braintree checkout form -->
+<form id="checkout" action="/checkout" method="post" autocomplete="off">
+    <div id="scooterSelection">
+        <div id="blackBluetooth" class = "scooterPicker"></div>
+        <div id="whiteBluetooth" class = "scooterPicker"></div>
+        <div id="goldBluetooth" class = "scooterPicker"></div>
+        <div id="redBluetooth" class = "scooterPicker"></div>
+        <div id="blueBluetooth" class = "scooterPicker"></div>
+        <div id="blackNo" class = "scooterPicker"><p class="scooterPickerButton" id="plusBlackNo">+</p><img class="scooterImage" src="/blackNo.png"><p class="scooterPickerButton" id="minusBlackNo">-</p><input type="text" id="blackNoQuant" name="blackNoQuant" value="0" maxlength="2" type="number" class="scooterOrderQuant"></div>
+        <div id="whiteNo" class = "scooterPicker"></div>
+        <div id="goldNo" class = "scooterPicker"></div>
+        <div id="redNo" class = "scooterPicker"><p class="scooterPickerButton" id="plusRedNo">+</p><img class="scooterImage" src="/redNo.png"><p class="scooterPickerButton" id="minusRedNo">-</p><input type="text" id="redNoQuant" name="redNoQuant" value="0" maxlength="2" type="number"  class="scooterOrderQuant"></div>
+        <div id="blueNo" class = "scooterPicker"><p class="scooterPickerButton" id="plusBlueNo">+</p><img class="scooterImage" src="/blueNo.png"><p class="scooterPickerButton" id="minusBlueNo">-</p><input type="text" id="blueNoQuant" name="blueNoQuant" value="0" maxlength="2" type="number"  class="scooterOrderQuant"></div>
+    </div>
+    <input name = "shippingAddress" value="123 Maple Way">
+    <input name = "items" value="1 blackNo" class="hiddenInputField">
+    <input name = "customerEmail" value="george@aol.com">
+    <input name = "customerFirstName" value="george">
+    <input name = "customerLastName" value = "may">
+    <input name = "customerPhone" value="5166920121">
+    <input name = "shippingStreetAddress" value="123 maple way">
+    <input name = "shippingExtendedAddress" value="">
+    <input name = "shippingCity" value="Woodgete">
+    <input name = "shippingState" value="NY">
+    <input name = "shippingPostalCode" value="12341">
+    <input name = "shippingFirstName" value="Begin">
+    <input name = "shippingLastName" value="Stein">
+    <input name = "billingFirstName" value="Begin">
+    <input name = "billingLastName" value="Stein">
+    <input name = "billingStreetAddress" value="123 Maple way">
+    <input name = "billingExtendedAddress" value="">
+    <input name = "billingCity" value="Yolanda">
+    <input name = "billingState" value="NY">
+    <input name = "billingPostalCode" value="12345">
+    <input name = "billingCountryCodeAlpha2" value="US">
+    <div id="payment-form"></div>
+    <input type="submit" value="Pay">
+</form>
+
+<script src="https://js.braintreegateway.com/v2/braintree.js"></script>
+<script>
+// We generated a client token for you so you can test out this code
+// immediately. In a production-ready integration, you will need to
+// generate a client token on your server and load braintree SDK
+
+xhttp = new XMLHttpRequest()
+xhttp.open("GET", '/client_token', true)
+xhttp.send()
+xhttp.onreadystatechange = function() {
+    if (xhttp.readyState === 4 && xhttp.status === 200) {
+        var clientToken = xhttp.responseText
+        braintree.setup(clientToken, "dropin", {
+                container: "payment-form"
+        })
+    }
+}
 
 
+</script>
     
     
     
 <!-- Scripts -->
 <script>
 // DOM objects
+    // scooter selection buttons
 var plusBlackNoButton = document.getElementById('plusBlackNo')
 var minusBlackNoButton = document.getElementById('minusBlackNo')
 var blackNoQuantInput = document.getElementById('blackNoQuant')
@@ -216,68 +290,127 @@ var redNoQuantInput = document.getElementById('redNoQuant')
 var plusBlueNoButton = document.getElementById('plusBlueNo')
 var minusBlueNoButton = document.getElementById('minusBlueNo')
 var blueNoQuantInput = document.getElementById('blueNoQuant')
+    // other form inputs
+var totalOrderAmountDisplay = document.getElementById('totalOrderAmountDisplay')
 
 
 
 // Order object
 var order = {
+    totalOrderAmount: 0,
+    numberOfItems: 0,
     blackNo: 0,
     plusBlackNoToOrder: function(evt) {
         evt.preventDefault()
-        var currentBlackNoQuant = parseInt(blackNoQuantInput.value) || 0
+        var currentBlackNoQuant = parseInt(blackNoQuantInput.value, 10) || 0
         currentBlackNoQuant++
         blackNoQuantInput.value = currentBlackNoQuant.toString()
         order.blackNo = currentBlackNoQuant
-        console.log(currentBlackNoQuant)
+        order.totalOrderAmount = order.totalOrderAmount + 200
+        var totalOrderAmountString = order.totalOrderAmount.toString()
+        changeTotalPurchaseAmount()
+        order.numberOfItems = order.numberOfItems + 1
+        var numberOfItemsString = order.numberOfItems.toString()
     },
     minusBlackNoToOrder: function(evt) {
         evt.preventDefault()
-        var currentBlackNoQuant = parseInt(blackNoQuantInput.value) || 0
+        var currentBlackNoQuant = parseInt(blackNoQuantInput.value, 10) || 0
         if (currentBlackNoQuant > 0) {
             currentBlackNoQuant--
             blackNoQuantInput.value = currentBlackNoQuant.toString()
             order.blackNo = currentBlackNoQuant
-            console.log(currentBlackNoQuant)
+            order.totalOrderAmount = order.totalOrderAmount - 200
+            var totalOrderAmountString = order.totalOrderAmount.toString()
+            changeTotalPurchaseAmount()
+            order.numberOfItems = order.numberOfItems - 1
+            var numberOfItemsString = order.numberOfItems.toString()
+            
         }
     },
     redNo: 0,
     plusRedNoToOrder: function(evt) {
         evt.preventDefault()
-        var currentRedNoQuant = parseInt(redNoQuantInput.value) || 0
+        var currentRedNoQuant = parseInt(redNoQuantInput.value, 10) || 0
         currentRedNoQuant++
         redNoQuantInput.value = currentRedNoQuant.toString()
         order.redNo = currentRedNoQuant
-        console.log(currentRedNoQuant)
+        order.totalOrderAmount = order.totalOrderAmount + 200
+        var totalOrderAmountString = order.totalOrderAmount.toString()
+        changeTotalPurchaseAmount()
+        order.numberOfItems = order.numberOfItems + 1
+        var numberOfItemsString = order.numberOfItems.toString()
     },
     minusRedNoToOrder: function(evt) {
         evt.preventDefault()
-        var currentRedNoQuant = parseInt(redNoQuantInput.value) || 0
+        var currentRedNoQuant = parseInt(redNoQuantInput.value, 10) || 0
         if (currentRedNoQuant > 0) {
             currentRedNoQuant--
             redNoQuantInput.value = currentRedNoQuant.toString()
             order.redNo = currentRedNoQuant
-            console.log(currentRedNoQuant)
+            order.totalOrderAmount = order.totalOrderAmount - 200
+            var totalOrderAmountString = order.totalOrderAmount.toString()
+            changeTotalPurchaseAmount()
+            order.numberOfItems = order.numberOfItems - 1
+            var numberOfItemsString = order.numberOfItems.toString()
         }
     },
     blueNo: 0,
     plusBlueNoToOrder: function(evt) {
         evt.preventDefault()
-        var currentBlueNoQuant = parseInt(blueNoQuantInput.value) || 0
+        var currentBlueNoQuant = parseInt(blueNoQuantInput.value, 10) || 0
         currentBlueNoQuant++
         blueNoQuantInput.value = currentBlueNoQuant.toString()
         order.blueNo = currentBlueNoQuant
-        console.log(currentBlueNoQuant)
+        order.totalOrderAmount = order.totalOrderAmount + 200
+        var totalOrderAmountString = order.totalOrderAmount.toString()
+        changeTotalPurchaseAmount()
+        order.numberOfItems = order.numberOfItems + 1
+        var numberOfItemsString = order.numberOfItems.toString()
     },
     minusBlueNoToOrder: function(evt) {
         evt.preventDefault()
-        var currentBlueNoQuant = parseInt(blueNoQuantInput.value) || 0
+        var currentBlueNoQuant = parseInt(blueNoQuantInput.value, 10) || 0
         if (currentBlueNoQuant > 0) {
             currentBlueNoQuant--
             blueNoQuantInput.value = currentBlueNoQuant.toString()
             order.blueNo = currentBlueNoQuant
-            console.log(currentBlueNoQuant)
+            order.totalOrderAmount = order.totalOrderAmount - 200
+            var totalOrderAmountString = order.totalOrderAmount.toString()
+            changeTotalPurchaseAmount()
+            order.numberOfItems = order.numberOfItems - 1
+            var numberOfItemsString = order.numberOfItems.toString()
         }
     }
+}
+
+// Function to ensure all inputs to order quantities are ints.
+function inputQuantChange(evt) {
+    var inputElement = evt.currentTarget
+    var inputKeyCode = evt.keyCode
+    var inputCharacter = String.fromCharCode(inputKeyCode)
+    if (/\D/.test(inputCharacter)) {
+        evt.preventDefault()
+    }
+}
+    
+// Calculate total purchase amount and change the displayed value whenever quantities are changed by pressing +/- or by inputting quantities manually.
+function changeTotalPurchaseAmount() {
+    var blackNoQuantString = blackNoQuantInput.value
+    var redNoQuantString = redNoQuantInput.value
+    var blueNoQuantString = blueNoQuantInput.value
+    var blackNoQuantInt = parseInt(blackNoQuantString)
+    var redNoQuantInt = parseInt(redNoQuantString)
+    var blueNoQuantInt = parseInt(blueNoQuantString)
+    if (!(blackNoQuantInt)) {
+        blackNoQuantInt = 0
+    }
+    if (!(redNoQuantInt)) {
+        redNoQuantInt = 0
+    }
+    if (!(blueNoQuantInt)) {
+        blueNoQuantInt = 0
+    }
+    totalOrderAmountDisplay.innerHTML = ((blackNoQuantInt + redNoQuantInt + blueNoQuantInt) * 200).toString()
 }
 
 // Event Listeners
@@ -295,6 +428,14 @@ plusRedNoButton.addEventListener('touchstart', order.plusRedNoToOrder)
 minusRedNoButton.addEventListener('touchstart', order.minusRedNoToOrder)
 plusBlueNoButton.addEventListener('touchstart', order.plusBlueNoToOrder)
 minusBlueNoButton.addEventListener('touchstart', order.minusBlueNoToOrder)
+    // input
+blackNoQuantInput.addEventListener('keypress', inputQuantChange)
+redNoQuantInput.addEventListener('keypress', inputQuantChange)
+blueNoQuantInput.addEventListener('keypress', inputQuantChange)
+    // input field blur
+blackNoQuantInput.addEventListener('blur', changeTotalPurchaseAmount)
+redNoQuantInput.addEventListener('blur', changeTotalPurchaseAmount)
+blueNoQuantInput.addEventListener('blur', changeTotalPurchaseAmount)
 
 
 
